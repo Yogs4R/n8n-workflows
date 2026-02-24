@@ -1,3 +1,5 @@
+![Banner](./n8n-hackerrank.png)
+
 # 🤖 HackerRank Stats Automation with n8n & Supabase
 
 ![n8n](https://img.shields.io/badge/Workflow-n8n-ff6d5a?style=for-the-badge&logo=n8n)
