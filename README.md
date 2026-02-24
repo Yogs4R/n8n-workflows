@@ -12,14 +12,14 @@ These workflows act as the backend data engine powering the live statistics disp
 
 Below is the list of automated workflows currently maintained in this repository. All workflow files are stored in the `workflows/` directory.
 
-| Platform | Workflow Description | Integrations | File |
+| Platform | Workflow Description | Integrations | Folder |
 | :--- | :--- | :--- | :--- |
-| ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) | Syncs GitHub profile stats (repos, stars, contributions). | n8n, Supabase | [`github.json`](./workflows/github.json) |
-| ![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=flat&logo=leetcode&logoColor=black) | Fetches LeetCode problem-solving statistics. | n8n, Supabase | [`leetcode.json`](./workflows/leetcode.json) |
-| ![HackerRank](https://img.shields.io/badge/HackerRank-00EA64?style=flat&logo=hackerrank&logoColor=white) | Automates HackerRank profile data retrieval. | n8n, Supabase | [`hackerrank.json`](./workflows/hackerrank.json) |
-| ![SoloLearn](https://img.shields.io/badge/SoloLearn-101728?style=flat&logo=sololearn&logoColor=white) | Updates SoloLearn coding progress and stats. | n8n, Supabase | [`sololearn.json`](./workflows/sololearn.json) |
-| **Dicoding** | Syncs Dicoding academy progress and completed courses. | n8n, Supabase | [`dicoding.json`](./workflows/dicoding.json) |
-| ![Roblox](https://img.shields.io/badge/Roblox-000000?style=flat&logo=roblox&logoColor=white) | Retrieves Roblox game metrics (visits, likes, favorites, members). | n8n, Supabase | [`roblox.json`](./workflows/roblox.json) |
+| ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) | Syncs GitHub profile stats (repos, stars, contributions). | n8n, Supabase | [`github-stats`](https://github.com/Yogs4R/n8n-workflows/tree/main/github-stats) |
+| ![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=flat&logo=leetcode&logoColor=black) | Fetches LeetCode problem-solving statistics. | n8n, Supabase | [`leetcode-stats`](https://github.com/Yogs4R/n8n-workflows/tree/main/leetcode-stats) |
+| ![HackerRank](https://img.shields.io/badge/HackerRank-00EA64?style=flat&logo=hackerrank&logoColor=white) | Automates HackerRank profile data retrieval. | n8n, Supabase | [`hackerrank-stats`](https://github.com/Yogs4R/n8n-workflows/tree/main/hackerrank-stats) |
+| ![SoloLearn](https://img.shields.io/badge/SoloLearn-101728?style=flat&logo=sololearn&logoColor=white) | Updates SoloLearn coding progress and stats. | n8n, Supabase | [`sololearn-stats`](https://github.com/Yogs4R/n8n-workflows/tree/main/sololearn-stats) |
+| **Dicoding** | Syncs Dicoding academy progress and completed courses. | n8n, Supabase | [`dicoding-stats`](https://github.com/Yogs4R/n8n-workflows/tree/main/dicoding-stats) |
+| ![Roblox](https://img.shields.io/badge/Roblox-000000?style=flat&logo=roblox&logoColor=white) | Retrieves Roblox game metrics (visits, likes, favorites, members). | n8n, Supabase | [`roblox-stats`](https://github.com/Yogs4R/n8n-workflows/tree/main/roblox-stats) |
 
 ## 🚀 How to Use
 
@@ -44,4 +44,4 @@ To run these workflows successfully, you will need:
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT LICENSE](./LICENSE).
