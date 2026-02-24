@@ -1,0 +1,185 @@
+{
+  "name": "portfolio-dicoding-stats",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8701436b-d68a-4ecd-bf16-01c5dbc1a7ee",
+      "name": "On App Start / Manual"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        -160
+      ],
+      "id": "40435a1d-ed07-4743-bf05-aec31834cb9b",
+      "name": "Every 1 hour"
+    },
+    {
+      "parameters": {
+        "url": "https://www.dicoding.com/users/riyogs/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        256,
+        -80
+      ],
+      "id": "49680b2f-62e0-4d2b-a585-8730fd2357a1",
+      "name": "Get Stats"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get HTML\nconst html = $input.first().json.data;\n\n// 1. Search XP from HTML\n// Logika Regex: Cari angka (\\d+) yang diikuti oleh spasi/enter (\\s*) lalu ada tag span dengan title=\"XP\"\nconst xpRegex = /([\\d.]+)\\s*<span[^>]*title=\"XP\"/;\nconst xpMatch = html.match(xpRegex);\n\n// Bersihkan angka (hapus titik ribuan jika ada, misal 10.000 jadi 10000)\nlet xp = 0;\nif (xpMatch && xpMatch[1]) {\n  xp = parseInt(xpMatch[1].replace(/\\./g, ''));\n}\n\n// Total Classes\n// Search keyword \"Academy\", continue with space, then span, space can be inside span, then get the number\nconst classRegex = /Academy\\s*<span[^>]*>\\s*(\\d+)/i;\nconst classMatch = html.match(classRegex);\n\nlet classes = 0;\nif (classMatch && classMatch[1]) {\n  classes = parseInt(classMatch[1]);\n}\n\nreturn {\n  json: {\n    platform: \"dicoding\",\n    stats: {\n      xp: xp,\n      classes: classes, \n      last_fetched: new Date().toISOString()\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        464,
+        -80
+      ],
+      "id": "d211402a-ca5d-46ef-a877-4588509bcaee",
+      "name": "Regex Stats"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "platform_stats",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "platform",
+              "condition": "eq",
+              "keyValue": "={{ $json.platform }}"
+            }
+          ]
+        },
+        "dataToSend": "autoMapInputData"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        672,
+        -80
+      ],
+      "id": "71eef908-00ab-421d-b7de-920e73c52151",
+      "name": "Update a row Supabase",
+      "credentials": {
+        "supabaseApi": {
+          "id": "h4k5YA7fYcsjF35W",
+          "name": "Supabase Portfolio Stats"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Every 1 hour": {
+      "main": [
+        [
+          {
+            "node": "Get Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On App Start / Manual": {
+      "main": [
+        [
+          {
+            "node": "Get Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Stats": {
+      "main": [
+        [
+          {
+            "node": "Regex Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Regex Stats": {
+      "main": [
+        [
+          {
+            "node": "Update a row Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "1b1fc4c2-4241-4a27-a11a-a26b24a8af30",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "37c66f27f19a42458ede6336939db7c94b24476e9651972bcb9c0725fbba68b2"
+  },
+  "id": "PPzl8Xw_KHOO1JFitITcZ",
+  "tags": [
+    {
+      "updatedAt": "2026-01-14T05:14:17.060Z",
+      "createdAt": "2026-01-14T05:14:17.060Z",
+      "id": "Cjf6WX8ozlEOLcQo",
+      "name": "stats"
+    },
+    {
+      "updatedAt": "2026-01-07T04:58:37.869Z",
+      "createdAt": "2026-01-07T04:58:37.869Z",
+      "id": "W13SvI2LXyZ0LcHa",
+      "name": "n8n"
+    },
+    {
+      "updatedAt": "2026-01-14T05:14:12.090Z",
+      "createdAt": "2026-01-14T05:14:12.090Z",
+      "id": "mncJN18udUw8cVGA",
+      "name": "portfolio"
+    },
+    {
+      "updatedAt": "2026-01-14T15:25:56.970Z",
+      "createdAt": "2026-01-14T15:25:56.970Z",
+      "id": "tCoj3ev5pw4QrppG",
+      "name": "dicoding"
+    }
+  ]
+}
